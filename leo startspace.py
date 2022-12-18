@@ -111,19 +111,16 @@ def addcart():
 
     print("would you u like to enter the sino of the product or search for it")
     print("type 1 to enter by sino")
-    print("type 2 to enter by name")  
-    choice=input(">>>")
-    while choice != "1" or "2":
-        print("enter 1 or 2")
-        choice=input(">>>")
-
+    print("type 2 to enter by name")
+    choice = input(">>>")
+    
     if choice=="1":
         print("enter a sino")
         lino=input(">>>")
         curs.execute("select proname from menutest where sino={}".format(lino))
         table=curs.fetchone()
         if len(table)==0:
-        print("there are no results for your search")
+            print("there are no results for your search")
         else:
             print(f"would you like to add  {table} to your cart ?")
             print("type 1 for yes")
@@ -152,8 +149,9 @@ def addcart():
     elif choice=="2":
         print("enter first few name of the product")
         liner=input(">>>")
-        curs.execute("select proname from menutest where proname like'{}%'".format(n))
+        curs.execute("select proname from menutest where proname like'{}%'".format(liner))
         tables=curs.fetchone()
+        print(table)
         if len(tables)==0:
             print("there are no results for your search")
             print("would you like to try again ?")
@@ -417,8 +415,8 @@ def viewcart():
                 print("enter the delivery location")
                 location = input(">>>")
                 random_days = random.randint(2,14)
-                print(f"your order will be delivered at {location})
-                print(f"within {random_days}.)
+                print(f"your order will be delivered at {location}")
+                print(f"within {random_days}.")
                 print("thank you for making your purchase")
                 print("moving to main menu")
                 startcustomer()
@@ -430,8 +428,8 @@ def viewcart():
                 print("enter the delivery location")
                 location = input(">>>")
                 random_days = random.randint(2,14)
-                print(f"your order will be delivered at {location})
-                print(f"within {random_days}.)
+                print(f"your order will be delivered at {location}")
+                print(f"within {random_days}.")
                 print("thank you for making your purchase")
                 print("moving to main menu")
                 startcustomer()                
