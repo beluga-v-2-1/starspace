@@ -17,12 +17,15 @@ except ModuleNotFoundError as e:
 c=mysql.connector.connect(host="localhost",user="root",password="password",charset="utf8")
 curs=c.cursor()
 c.commit()
-curs.execute("use test")
+try:
+    curs.execute("use test")
+except Exception as e :
+    checker()
+    
 m=0
 def end():
     print("thanks for using my program")
     exit()
- 
 def view():
     curs.execute("use test")
     curs.execute("select * from employeetest")
@@ -73,7 +76,7 @@ def deleteemployee():
     choice=input(">>>")
     if choice.lower()=="end":
         print("moving back to main menu")
-        startscreen()
+        startcustomer()
     elif choice.lower()=="y":
         print(f"deleting {finite} from the database of employees")
         curs.execute("delete from employeetest where admno={}".format(name))
@@ -103,12 +106,6 @@ def viewmenu():
         print(i)
     startcustomer()
 def addcart():
-    try:
-        
-        curs.execute("desc cart")
-    except mysql.connector.errors.ProgrammingError as e:
-        curs.execute("create table cart(sino varchar(8),name varchar(20),nos varchar(6))")
-
     print("would you u like to enter the sino of the product or search for it")
     print("type 1 to enter by sino")
     print("type 2 to enter by name")
@@ -117,8 +114,9 @@ def addcart():
     if choice=="1":
         print("enter a sino")
         lino=input(">>>")
-        curs.execute("select proname from menutest where sino={}".format(lino))
-        table=curs.fetchone()
+        curs.execute("select proname from menutest where sino = '{}'".format(lino))
+
+        table=curs.fetchall()
         if len(table)==0:
             print("there are no results for your search")
         else:
@@ -126,10 +124,10 @@ def addcart():
             print("type 1 for yes")
             print("type 2 for no")
             choicer=input(">>>")    
-            if choicer=="1":
+            if choicer == "1" or "yes":
                 print("how many would you like to add")
                 number=input(">>>")
-                curs.execute("insert into menutest values('{}','{}','{}')".format(lino,table,number))
+                curs.execute("insert into cart values('{}','{}','{}')".format(lino,table,number))
                 print("item has successfully been added to the cart")
                 print("type 1 to ENTER more items")
                 print("type 2 to go BACK to main menu")
@@ -144,13 +142,16 @@ def addcart():
                 else:
                     print("invalid option selected, moving to main menu")
                     startcustomer()
+            elif choicer == "2" or "no" :
+                addcart()
 
 
     elif choice=="2":
         print("enter first few name of the product")
         liner=input(">>>")
         curs.execute("select proname from menutest where proname like'{}%'".format(liner))
-        tables=curs.fetchone()
+        tables=curs.fetchall
+        ()
         print(table)
         if len(tables)==0:
             print("there are no results for your search")
@@ -198,6 +199,7 @@ def checker():
             curs.execute("use test")
             curs.execute("create table menutest(sino varchar(8),proname varchar(20),price varchar(6),producer varchar(15), batchno varchar(10))") 
             curs.execute("create table employeetest(admno varchar(5),name varchar(20),phoneno varchar(20),sex varchar(4),age varchar(3))")        
+            curs.execute("create table cart(sino varchar(8),name varchar(20),nos varchar(6))")
             c.commit()
             print("congrats on purchasing our program.")
             print("installation of our program is complete please proceed to the main program")
@@ -234,12 +236,12 @@ def insertfood():
     n2=input(">>>")                       #second input(proname)
     if n2.lower()=="end":
         print("command detected, moving to MAIN MENU")
-        customerscreen()  
+        startcustomer()  
     print("enter the sale price")         #third input(price)
     n3=input(">>>")
     if n3.lower()=="end":
         print("command detected, moving to MAIN MENU")
-        customerscreen()
+        startcustomer()
     elif n3.isdigit()==False:
             print("try entering a proper phone ?")
             insertfood()
@@ -252,7 +254,7 @@ def insertfood():
     n5=input(">>>")
     if n5.lower()=="end":
         print("command detected, moving to MAIN MENU")
-        customerscreen()
+        startcustomer()
     elif n5.isdigit()==False:
         print("try and enter a proper number ?")
         insertfood()
@@ -270,13 +272,13 @@ def insertfood():
     choice=input(">>>")
     if choice.lower()=="end":
         print("moving to main menu")
-        customerscreen() 
+        startcustomer() 
     elif choice.lower()=="y":
         print("lets add more products then")
         insertfood()
     elif choice.lower()=="n":
         print("exiting to main menu")
-        customerscreen()
+        startcustomer()
     else :
         print("please enter a alphabetical value(either end, y or n)")
         insertfood()
@@ -351,7 +353,7 @@ def employeesearch():
     print("enter the first few letter of your employeename")            #this function is used to search an employee by its name
     n=input(">>>")
     if n.lower()=="end":
-        startscreen()
+        startcustomer()
     curs.execute("select * from employeetest where name like'{}%'".format(n))
     table=curs.fetchall()
     if len(table)==0:
@@ -416,7 +418,7 @@ def viewcart():
                 location = input(">>>")
                 random_days = random.randint(2,14)
                 print(f"your order will be delivered at {location}")
-                print(f"within {random_days}.")
+                print(f"within {random_days} days.")
                 print("thank you for making your purchase")
                 print("moving to main menu")
                 startcustomer()
@@ -522,7 +524,7 @@ def employeescreen():
     if digit==False:
         
         print("PLEASE ENTER A NUMBER")
-        startscreen()
+        startcustomer()
     elif choice=="1":                                                          
         addpeople()
         #add  employee
@@ -550,6 +552,6 @@ def employeescreen():
         
     else:
         print("please enter a valid option")
-        startscreen()
+        startcustomer()
         
-welcomescreener()                                         #this calls and starts the whole program
+welcomescreener()
