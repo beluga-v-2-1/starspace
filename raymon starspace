@@ -96,19 +96,23 @@ def bar_chart():
 
 def main_menu():
   ch=0
-  print("                     ==============================")
-  print("                             Main Menu")
-  print("                     ==============================")
   while ch!=9:
-    print("""
-          1. Show DataFrame
-          2. Data without index
-          3. Data in Ascending order of Price
-          4. Edit a record
-          5. Line Graph
-          6. Bar Graph
-          7. Exit
-          """)
+    print("+--------------------------------------------------------------+")
+    print("|                  WELCOME TO AUTOMARKET                       |")
+    print("+--------------------------------------------------------------+")
+    print("                                                                ")
+    print("+--------------------------------------------------------------+")
+    print("| WHAT DO YOU NEED HELP WITH ?                                 |")
+    print("+-----------------------------------+--------------------------+")  
+    print("| Show DataFrame                    | TYPE 1                   |")
+    print("| Data without index                | TYPE 2                   |")
+    print("| Data in Ascending order of Price  | TYPE 3                   |")
+    print("| Edit a record                     | TYPE 4                   |")
+    print("| Line Graph                        | TYPE 5                   |")
+    print("| Bar Graph                         | TYPE 6                   |")
+    print("| Exit                              | TYPE 7                   |")    
+    print("+-----------------------------------+--------------------------+")
+    print()
     ch=int(input("Enter your choice:"))
     if ch==1:
       showData()
