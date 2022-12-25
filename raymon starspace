@@ -1,0 +1,154 @@
+
+2 of 696
+source code
+Inbox
+
+AKSHAY S NAIR <akshaysn665@gmail.com>
+Attachments
+Thu, 22 Dec, 22:59 (3 days ago)
+to me
+
+
+2
+ Attachments
+  • Scanned by Gmail
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def showData():
+  df=pd.read_csv("used cars ip.csv")
+  print(df)
+  input("Press any key to continue....")
+
+def dataNoIndex():
+  df=pd.read_csv("used cars ip.csv",index_col=0)
+  print(df)
+  input("Press any key to continue...")
+
+def data_sorted():
+  df=pd.read_csv('used cars ip.csv')
+  print(df.sort_values(by=['Price']))
+  
+def edit_data():
+  df=pd.read_csv("used cars ip.csv")
+  di=input("Enter Model_Name to edit:")
+  col=input("Enter column name to update:")
+  val=input("Enter new Model_Name:")
+  df.loc[df[df['Model_Name']==di].index.values,col]=val
+  df.to_csv("used cars ip.csv",index=False)
+  print("Record has been updated...")
+  input("Press any key to continue...")
+  
+def line_chart():
+  df=pd.read_csv('used cars ip.csv')
+  Model_Name=df["Model_Name"]
+  Year=df["Year"]
+  km_Driven=df["km_Driven"]
+  Price=df["Price"]
+  plt.xlabel("Model_Name")
+  Y=0
+  while Y!=4:
+      print("                     ==============================")
+      print("                             Line Graph Menu")
+      print("                     ==============================")
+      print("1.Model_Name wise km_Driven ")
+      print("2.Model_Name wise Price ")
+      print("3.All data")
+      print("4.Return to main menu.")
+      Y = int(input("Enter your choice to get line graph: "))
+      if Y == 1:
+          plt.ylabel("km_Driven")
+          plt.title("Model_Name wise km_Driven")
+          plt.plot(Model_Name, km_Driven, color='b')
+          plt.show()
+      elif Y == 2:
+          plt.ylabel("Price")
+          plt.title("Model_Name wise Price")
+          plt.plot(Model_Name, Price, color='k')
+          plt.show()
+      elif Y == 3:
+          plt.ylabel("All Data")
+          plt.plot(Model_Name, km_Driven, color='b', label = "Model_Name wise km_Driven")
+          plt.plot(Model_Name, Price, color='k', label = "Model_Name wise Price")
+          plt.legend()
+          plt.show()
+      elif Y== 4:
+          print("Line Graph Closed.....")
+          main_menu()
+      else:
+          print("Sorry!! Invalid Option! Try Again!!!")
+          main_menu()
+  
+def bar_chart():
+  df=pd.read_csv('used cars ip.csv')
+  Model_Name=df["Model_Name"]
+  Year=df["Year"]
+  km_Driven=df["km_Driven"]
+  Price=df["Price"]
+  plt.xlabel("Model_Name")
+  
+  print("                     ==============================")
+  print("                             Bar Graph Menu")
+  print("                     ==============================")
+  print("1. Model_Name wise km_Driven")
+  print("2. Model_Name wise Price")
+  print("3. All data")
+  print("4. Return to main menu.")
+  Y=0
+  while Y!=4:
+      Y = int(input("Enter your choice to get bar graph: "))
+      if Y == 1:
+          plt.ylabel("km_Driven")
+          plt.title("Model_Name wise km_Driven")
+          plt.bar(Model_Name, km_Driven, color='b', width = 0.5)
+          plt.show()
+      elif Y == 2:
+          plt.ylabel("Price")
+          plt.title("Model_Name wise Price")
+          plt.bar(Model_Name, Price, color='k', width = 0.5)
+          plt.show()
+      elif Y == 3:
+          plt.bar(Model_Name, km_Driven, color='b', label = "Model_Name wise km_Driven")
+          plt.bar(Model_Name, Price, color='k', label = "Model_Name wise Price")
+          plt.legend()
+          plt.show()
+      elif Y== 4:
+        print("Bar Graph Closed.....")
+        main_menu()
+      else:
+        print("Sorry!! Invalid Option! Try Again!!!")
+        main_menu()
+
+def main_menu():
+  ch=0
+  print("                     ==============================")
+  print("                             Main Menu")
+  print("                     ==============================")
+  while ch!=9:
+    print("""
+          1. Show DataFrame
+          2. Data without index
+          3. Data in Ascending order of Price
+          4. Edit a record
+          5. Line Graph
+          6. Bar Graph
+          7. Exit
+          """)
+    ch=int(input("Enter your choice:"))
+    if ch==1:
+      showData()
+    elif ch==2:
+      dataNoIndex()
+    elif ch==3:
+      data_sorted()
+    elif ch==4:
+      edit_data()
+    elif ch==5:
+      line_chart()
+    elif ch==6:
+      bar_chart()
+    elif ch==7:
+      print("Thank you for using our App, Bye Bye, See you again!!")
+      break
+main_menu()
