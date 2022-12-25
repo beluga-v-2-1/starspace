@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import csv 
 
 def showData():
   df=pd.read_csv("used cars ip.csv")
@@ -31,7 +32,6 @@ def line_chart():
   df=pd.read_csv('used cars ip.csv')
   Model_Name=df["Model_Name"]
   Year=df["Year"]
-  km_Driven=df["km_Driven"]
   Price=df["Price"]
   plt.xlabel("Model_Name")
   Y=0
@@ -39,28 +39,22 @@ def line_chart():
       print("                     ==============================")
       print("                             Line Graph Menu")
       print("                     ==============================")
-      print("1.Model_Name wise km_Driven ")
-      print("2.Model_Name wise Price ")
-      print("3.All data")
-      print("4.Return to main menu.")
+      print("1.Model_Name wise Price ")
+      print("2.All data")
+      print("3.Return to main menu.")
       Y = int(input("Enter your choice to get line graph: "))
-      if Y == 1:
-          plt.ylabel("km_Driven")
-          plt.title("Model_Name wise km_Driven")
-          plt.plot(Model_Name, km_Driven, color='b')
-          plt.show()
-      elif Y == 2:
+      elif Y == 1:
           plt.ylabel("Price")
           plt.title("Model_Name wise Price")
           plt.plot(Model_Name, Price, color='k')
           plt.show()
-      elif Y == 3:
+      elif Y == 2:
           plt.ylabel("All Data")
           plt.plot(Model_Name, km_Driven, color='b', label = "Model_Name wise km_Driven")
           plt.plot(Model_Name, Price, color='k', label = "Model_Name wise Price")
           plt.legend()
           plt.show()
-      elif Y== 4:
+      elif Y== 3:
           print("Line Graph Closed.....")
           main_menu()
       else:
@@ -71,36 +65,29 @@ def bar_chart():
   df=pd.read_csv('used cars ip.csv')
   Model_Name=df["Model_Name"]
   Year=df["Year"]
-  km_Driven=df["km_Driven"]
   Price=df["Price"]
   plt.xlabel("Model_Name")
   
   print("                     ==============================")
   print("                             Bar Graph Menu")
   print("                     ==============================")
-  print("1. Model_Name wise km_Driven")
-  print("2. Model_Name wise Price")
-  print("3. All data")
-  print("4. Return to main menu.")
+  print("1. Model_Name wise Price")
+  print("2. All data")
+  print("3. Return to main menu.")
   Y=0
   while Y!=4:
       Y = int(input("Enter your choice to get bar graph: "))
-      if Y == 1:
-          plt.ylabel("km_Driven")
-          plt.title("Model_Name wise km_Driven")
-          plt.bar(Model_Name, km_Driven, color='b', width = 0.5)
-          plt.show()
-      elif Y == 2:
+      elif Y == 1:
           plt.ylabel("Price")
           plt.title("Model_Name wise Price")
           plt.bar(Model_Name, Price, color='k', width = 0.5)
           plt.show()
-      elif Y == 3:
+      elif Y == 2:
           plt.bar(Model_Name, km_Driven, color='b', label = "Model_Name wise km_Driven")
           plt.bar(Model_Name, Price, color='k', label = "Model_Name wise Price")
           plt.legend()
           plt.show()
-      elif Y== 4:
+      elif Y== 3:
         print("Bar Graph Closed.....")
         main_menu()
       else:
