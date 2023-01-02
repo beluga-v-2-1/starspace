@@ -20,7 +20,7 @@ c.commit()
 try:
     curs.execute("use test")
 except Exception as e :
-    checker()
+    pass
     
 m=0
 def end():
@@ -115,7 +115,6 @@ def checker():
             curs.execute("use test")
             curs.execute("create table menutest(sino varchar(8),proname varchar(20),price varchar(6),producer varchar(15), batchno varchar(10))") 
             curs.execute("create table employeetest(admno varchar(5),name varchar(20),phoneno varchar(20),sex varchar(4),age varchar(3))")        
-            curs.execute("create table cart(sino varchar(8),name varchar(20),nos varchar(6))")
             c.commit()
             print("congrats on purchasing our program.")
             print("installation of our program is complete please proceed to the main program")
@@ -294,7 +293,6 @@ def employeesearch():
         else:
             print("moving to employee menu")
             employeescreen()
-
 def startcustomer():
     print("+--------------------------------------------------------------+")
     print("|        WELCOME TO SPORTWORLD (customer edition)              |")
@@ -353,7 +351,7 @@ def addpeople():
     employeescreen()
 def employeescreen():
     print("+--------------------------------------------------------------+")
-    print("|        WELCOME TO HYPERMARKET MAX (Retailer edition)         |")
+    print("|        WELCOME TO SPORTWORLD      (Retailer edition)         |")
     print("+--------------------------------------------------------------+")
     print("                                                                ")
     print("+--------------------------------------------------------------+")
@@ -372,7 +370,6 @@ def employeescreen():
     choice=input(">>>")
     digit=choice.isdigit()
     if digit==False:
-        
         print("PLEASE ENTER A NUMBER")
         startcustomer()
     elif choice=="1":                                                          
@@ -381,27 +378,21 @@ def employeescreen():
     elif choice=="2":
         print("Here's the present employee table")                             #view employee list
         view()
-        
     elif choice=="3":
         print("lets delete an employee from the database")                     #deleting employee
         deleteemployee()
-        
     elif choice=="4":
         print("lets search an employee")                      #searching an employee with name
         employeesearch()
-        
     elif choice=="5":
         welcomescreen()
-        
     elif choice=="6":
         c=1
         end()
-
     elif choice=="7":
         insertfood()
-        
     else:
         print("please enter a valid option")
         startcustomer()
-        
 welcomescreener()
+
