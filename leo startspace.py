@@ -105,90 +105,6 @@ def viewmenu():
     for i in table:
         print(i)
     startcustomer()
-def addcart():
-    print("would you u like to enter the sino of the product or search for it")
-    print("type 1 to enter by sino")
-    print("type 2 to enter by name")
-    choice = input(">>>")
-    
-    if choice=="1":
-        print("enter a sino")
-        lino=input(">>>")
-        curs.execute("select proname from menutest where sino = '{}'".format(lino))
-
-        table=curs.fetchall()
-        if len(table)==0:
-            print("there are no results for your search")
-        else:
-            print(f"would you like to add  {table} to your cart ?")
-            print("type 1 for yes")
-            print("type 2 for no")
-            choicer=input(">>>")    
-            if choicer == "1" or "yes":
-                print("how many would you like to add")
-                number=input(">>>")
-                curs.execute("insert into cart values('{}','{}','{}')".format(lino,table,number))
-                print("item has successfully been added to the cart")
-                print("type 1 to ENTER more items")
-                print("type 2 to go BACK to main menu")
-                newchoice=input(">>>")
-                while newchoice =="":
-                    print("enter a choice")
-                    newchoice=input(">>>")
-                if newchoice == "1":
-                    addcart()
-                elif newchoice == "2":
-                    startcustomer()
-                else:
-                    print("invalid option selected, moving to main menu")
-                    startcustomer()
-            elif choicer == "2" or "no" :
-                addcart()
-
-
-    elif choice=="2":
-        print("enter first few name of the product")
-        liner=input(">>>")
-        curs.execute("select proname from menutest where proname like'{}%'".format(liner))
-        tables=curs.fetchall
-        ()
-        print(table)
-        if len(tables)==0:
-            print("there are no results for your search")
-            print("would you like to try again ?")
-            print("type either YES or NO")
-            exactchoice=input(">>>")
-            if exactchoice.lower()== "yes":
-                addcart()
-            elif exactchoice.lower() == "no":
-                print("moving to main menu")
-                startcustomer()
-            
-        else:
-            print(f"would you like to add {tables} to the cart ?")
-            print("type 1 for yes")
-            print("type 2 for no")
-            choicer=input(">>>")    
-            if choicer=="1":
-                print("how many would you like to add")
-                numbers=input(">>>")
-                curs.execute("insert into menutest values('{}','{}','{}')".format(liner,tables,numbers))
-                print("item has successfully been added to the cart")
-                print("type 1 to ENTER more items")
-                print("type 2 to go BACK to main menu")
-                newchoice=input(">>>")
-                while newchoice =="":
-                    print("enter a choice")
-                    newchoice=input(">>>")
-                if newchoice == "1":
-                    addcart()
-                elif newchoice == "2":
-                    startcustomer()
-                else:
-                    print("invalid option selected, moving to main menu")
-                    startcustomer()
-
- 
 def checker():   
     print("is this the first time initiating this program ?")                 
     print("type y for yes and n for no")                                        #this program is used to install the databases and start a table
@@ -379,64 +295,6 @@ def employeesearch():
             print("moving to employee menu")
             employeescreen()
 
-
-def viewcart():
-    curs.execute("select * from cart ")           #this function is used to sort all the items by price
-    table=curs.fetchall()
-    for i in table:
-        print(i)
-
-
-    print("To continue with purchase type 1")
-    print("To go back to main menu   type 2")
-    choice = input(">>>")
-    while choice == "":
-        print("enter an option")
-        choice = input(">>>")
-    else:
-        if choice == "1":
-            print("moving to payment page")
-            print()
-            print("+--------------------------------------------------------------+")
-            print("| SSELECT A PAYMENT PLAN                                       |")    
-            print("+------------------------------------+-------------------------+")
-            print("| GOOGLE PAY                         | TYPE 1                  |")  
-            print("| CASH ON DELIVERY                   | TYPE 2                  |")
-            print("| end this whole program             | TYPE end                |")
-            print("+------------------------------------+-------------------------+")
-
-            choicer = input(">>>")
-            while choicer not in ("1" , "2" , "end"):
-                print("enter a proper value")
-                choicer = input(">>>")
-            if choicer == "1" :
-                print("enter your number")
-                paynumber = input(">>>")
-                print("transaction completed")
-                print()
-                print("enter the delivery location")
-                location = input(">>>")
-                random_days = random.randint(2,14)
-                print(f"your order will be delivered at {location}")
-                print(f"within {random_days} days.")
-                print("thank you for making your purchase")
-                print("moving to main menu")
-                startcustomer()
-            elif choicer == "2" :
-                print("enter your number")
-                paynumber = input(">>>")
-                print("transaction completed")
-                print()
-                print("enter the delivery location")
-                location = input(">>>")
-                random_days = random.randint(2,14)
-                print(f"your order will be delivered at {location}")
-                print(f"within {random_days}.")
-                print("thank you for making your purchase")
-                print("moving to main menu")
-                startcustomer()                
-            
-            
 def startcustomer():
     print("+--------------------------------------------------------------+")
     print("|        WELCOME TO SPORTWORLD (customer edition)              |")
@@ -449,8 +307,6 @@ def startcustomer():
     print("| Search for a product              | TYPE 2                   |")
     print("| view product by pricing           | TYPE 3                   |")
     print("| Go back to welcome screen         | TYPE 4                   |")
-    print("| add items to cart                 | TYPE 5                   |")
-    print("| Go to cart                        | TYPE 6                   |")
     print("| Exit program                      | TYPE end                 |")
     print("+-----------------------------------+--------------------------+")
     print("enter your choice")
@@ -472,12 +328,6 @@ def startcustomer():
         priceview()
     elif choice=="4":                                      #fourth going back to welcome screen
         welcomescreen()
-    elif choice=="5":                                      #add items to cart
-        print("moving to add items to cart")
-        addcart()
-    elif choice=="6":                                      #view cart
-        print("showing cart")
-        viewcart()
     elif choice=="end":                                      #fifth exiting the program
         exit()
     else:
